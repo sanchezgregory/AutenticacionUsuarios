@@ -44,7 +44,7 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                        @if (auth()->check())
+                        @if (auth()->check() && Access::check(Auth::user()->role, 'user'))
                             <li><a href="{{ url('/account') }}">Usuarios</a></li>
                         @endif
                         @if (auth()->check() && Access::check(Auth::user()->role, 'editor'))
