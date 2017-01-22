@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Activity;
+use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
@@ -13,20 +15,24 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'App\Events\SomeEvent' => [
-            'App\Listeners\EventListener',
+
+        'Illuminate\Auth\Events\Login' => [
+            'App\Listeners\LogLastLogin',
+            'App\Listeners\UpdateLastLoggedAt',
         ],
+
     ];
 
     /**
      * Register any events for your application.
      *
-     * @return void
      */
     public function boot()
     {
         parent::boot();
 
-        //
+        Event::listen('eloquent.created: *', function ($model) {
+           Activity::record('create', $model);
+        });
     }
 }

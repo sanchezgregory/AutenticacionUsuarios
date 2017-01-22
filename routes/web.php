@@ -65,9 +65,9 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::group(['middleware' => 'verified'], function() {
 
-        Route::get('publish', function() {
-            return view('publish');
-        });
+        Route::get('posts/index', 'PostController@indexPost')->name('indexPost');
+        Route::get('posts/publish', 'PostController@createPost')->name('createPost');
+        Route::post('posts/publish', 'PostController@storePost')->name('storePost');
 
         Route::post('publish', function() {
 

@@ -48,7 +48,7 @@
                             <li><a href="{{ url('/account') }}">Usuarios</a></li>
                         @endif
                         @if (auth()->check() && Access::check(Auth::user()->role, 'editor'))
-                            <li><a href="{{ url('/publish') }}">Edito</a></li>
+                            <li><a href="{{ url('posts/index') }}">Posts</a></li>
                         @endif
                         @if (auth()->check() && Access::check(Auth::user()->role, 'admin'))
                             <li><a href="{{ url('admin/settings') }}">Admin</a></li>
