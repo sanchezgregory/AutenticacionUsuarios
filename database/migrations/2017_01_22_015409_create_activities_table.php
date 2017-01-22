@@ -19,7 +19,7 @@ class CreateActivitiesTable extends Migration
             $table->string('action');
             $table->string('model_class')->nullable();
             $table->string('model_id')->nullable();
-            $table->integer('author_id')->unsigned()->index();
+            $table->integer('user_id')->unsigned()->index();
 
             $table->timestamps();
         });

@@ -26,11 +26,14 @@ class PostController extends Controller
 
     public function storePost(Request $request)
     {
-        //dd($request);
-        $post = new Post($request->all());
-        $post->user_id = Auth::user()->id;
-        $post->save();
+        $this->validate($request, [
+            'title' => 'required',
+            'content' => 'required'
+        ]);
 
-        return redirect()->route('indexPost')->with('alert', 'Post creado');
+        Post::submit($request->all()); // metodo submit statico dentro de modelo Post
+
+        return redirect()->route('indexPost')->with('success', 'Post creado');
+
     }
 }
